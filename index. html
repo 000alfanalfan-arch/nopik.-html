@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Aksesoris - Pink Lucu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffb6c1, #87cefa);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #fff0f5;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            border: 3px solid #ff69b4;
+        }
+        h2 {
+            color: #d147a3;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px 0;
+            border: 2px solid #ffb6c1;
+            border-radius: 12px;
+            box-sizing: border-box;
+            background: #fff;
+            font-size: 14px;
+        }
+        input:focus {
+            border-color: #ff69b4;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #ff1493;
+        }
+        .back-btn {
+            background: #87cefa;
+            color: #333;
+            margin-top: 5px;
+        }
+        .back-btn:hover {
+            background: #00bfff;
+        }
+        .product-card {
+            background: white;
+            border: 2px dashed #ff69b4;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        table, th, td {
+            border: 1px solid #ffb6c1;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #ffb6c1;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 1. HALAMAN PILIH LOGIN -->
+    <div id="page-login-choice" class="page active">
+        <h2>🌸 Sakura Aksesoris 🌸</h2>
+        <p style="text-align: center; color: #d147a3; font-weight: bold;">Silakan pilih akses masuk:</p>
+        <button onclick="goToPage('page-admin-login')">Login sebagai Admin</button>
+        <button onclick="goToPage('page-customer-login')" style="background: #87cefa; color: #333; box-shadow: 0 4px 10px rgba(135, 206, 250, 0.4);">Login sebagai Customer</button>
+    </div>
+
+    <!-- 2. HALAMAN FORM LOGIN ADMIN -->
+    <div id="page-admin-login" class="page">
+        <h2>🔐 Login Admin</h2>
+        <label>Username:</label>
+        <input type="text" id="adminUser" placeholder="Masukkan admin">
+        <label>Password:</label>
+        <input type="password" id="adminPass" placeholder="Masukkan 123">
+        <button onclick="handleAdminLogin()">Masuk</button>
+        <button class="back-btn" onclick="goToPage('page-login-choice')">Kembali</button>
+    </div>
+
+    <!-- 3. HALAMAN DASHBOARD ADMIN -->
+    <div id="page-admin-dashboard" class="page">
+        <h2>📊 Laporan Admin</h2>
+        <p style="font-size: 14px; color: #555;">Berikut rekapitulasi toko:</p>
+        
+        <h4 style="color: #d147a3; margin: 10px 0 5px 0;">Laporan Harian</h4>
+        <table>
+            <tr><th>Hari</th><th>Transaksi</th><th>Total</th></tr>
+            <tr><td>Hari Ini</td><td>15 Order</td><td>Rp 450.000</td></tr>
+        </table>
+
+        <h4 style="color: #d147a3; margin: 15px 0 5px 0;">Laporan Bulanan</h4>
+        <table>
+            <tr><th>Bulan</th><th>Transaksi</th><th>Total</th></tr>
+            <tr><td>Agustus</td><td>320 Order</td><td>Rp 12.500.000</td></tr>
+        </table>
+
+        <h4 style="color: #d147a3; margin: 15px 0 5px 0;">Laporan Tahunan</h4>
+        <table>
+            <tr><th>Tahun</th><th>Total Pendapatan</th></tr>
+            <tr><td>2026</td><td>Rp 145.000.000</td></tr>
+        </table>
+
+        <button class="back-btn" onclick="goToPage('page-login-choice')" style="margin-top: 20px;">Logout / Keluar</button>
+    </div>
+
+    <!-- 4. HALAMAN FORM LOGIN CUSTOMER -->
+    <div id="page-customer-login" class="page">
+        <h2>🛍️ Data Customer</h2>
+        <label>Username:</label>
+        <input type="text" id="custUser" placeholder="Nama kamu">
+        <label>Password:</label>
+        <input type="password" placeholder="Password bebas">
+        <label>Alamat Pengiriman:</label>
+        <input type="text" id="custAlamat" placeholder="Alamat lengkap rumahmu">
+        <button onclick="handleCustLogin()">Mulai Belanja</button>
+        <button class="back-btn" onclick="goToPage('page-login-choice')">Kembali</button>
+    </div>
+
+    <!-- 5. HALAMAN KATALOG & KERANJANG BELANJA CUSTOMER -->
+    <div id="page-customer-shop" class="page">
+        <h2>🎀 Katalog Sakura Aksesoris</h2>
+        <p style="font-size: 13px; text-align: center; color: #d147a3;">Pilih produk favoritmu di bawah:</p>
+
+        <!-- Produk 1 -->
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=150" alt="Jepit Rambut">
+            <h4 style="margin: 5px 0; color: #d147a3;">Jepit Pita Pink Estetik</h4>
+            <p style="margin: 5px 0; font-weight: bold; color: #333;">Rp 25.000</p>
+            <button onclick="addToCart('Jepit Pita Pink Estetik', 25000)" style="padding: 8px; font-size: 13px;">Tambah ke Keranjang 🛒</button>
+        </div>
+
+        <!-- Produk 2 -->
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=150" alt="Kalung Sakura">
+            <h4 style="margin: 5px 0; color: #d147a3;">Kalung Manik Rangkaian Sakura</h4>
+            <p style="margin: 5px 0; font-weight: bold; color: #333;">Rp 45.000</p>
+            <button onclick="addToCart('Kalung Manik Rangkaian Sakura', 45000)" style="padding: 8px; font-size: 13px;">Tambah ke Keranjang 🛒</button>
+        </div>
+
+        <div style="background: #fff5ee; padding: 12px; border-radius: 12px; border: 1px solid #ffb6c1; margin-top: 15px;">
+            <h4 style="margin: 0 0 5px 0; color: #d147a3;">Ringkasan Keranjang:</h4>
+            <p id="cart-summary" style="margin: 0; font-size: 14px; font-weight: bold;">Belum ada item dipilih.</p>
+            
+            <label style="font-size: 13px; margin-top: 10px; display: block;">Pilih Metode Pembayaran:</label>
+            <select id="payment-method">
+                <option value="Transfer Bank">Transfer Bank</option>
+                <option value="QRIS">QRIS</option>
+                <option value="COD">COD (Bayar di Tempat)</option>
+            </select>
+
+            <button onclick="checkout()" style="background: #ff69b4; margin-top: 5px;">Check Out Sekarang ✨</button>
+        </div>
+
+        <button class="back-btn" onclick="goToPage('page-login-choice')" style="margin-top: 15px;">Keluar / Ganti Akun</button>
+    </div>
+
+</div>
+
+<script>
+    let cartTotal = 0;
+    let cartItems = [];
+
+    function goToPage(pageId) {
+        let pages = document.querySelectorAll('.page');
+        pages.forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    function handleAdminLogin() {
+        let u = document.getElementById('adminUser').value;
+        let p = document.getElementById('adminPass').value;
+        if (u === 'admin' && p === '123') {
+            alert('Yeay, Berhasil Login Admin! 🎉');
+            goToPage('page-admin-dashboard');
+        } else {
+            alert('Ups! Username atau Password Admin salah (Gunakan: admin / 123)');
+        }
+    }
+
+    function handleCustLogin() {
+        let u = document.getElementById('custUser').value;
+        let a = document.getElementById('custAlamat').value;
+        if (u.trim() === '' || a.trim() === '') {
+            alert('Harap isi Username dan Alamat lengkap dulu ya! 🌸');
+        } else {
+            alert('Halo ' + u + '! Selamat berbelanja di Sakura Aksesoris 💕');
+            goToPage('page-customer-shop');
+        }
+    }
+
+    function addToCart(itemName, itemPrice) {
+        cartItems.push(itemName);
+        cartTotal += itemPrice;
+        document.getElementById('cart-summary').innerText = cartItems.length + ' item dipilih | Total: Rp ' + cartTotal.toLocaleString('id-ID');
+        alert(itemName + ' berhasil ditambahkan ke keranjang! 🛍️');
+    }
+
+    function checkout() {
+        if (cartTotal === 0) {
+            alert('Keranjang belanjaanmu masih kosong! Pilih produknya dulu ya.');
+            return;
+        }
+        let payment = document.getElementById('payment-method').value;
+        alert('Checkout Berhasil! 🎉\nTotal Belanja: Rp ' + cartTotal.toLocaleString('id-ID') + '\nMetode Pembayaran: ' + payment + '\nTerima kasih sudah berbelanja di Sakura Aksesoris!');
+        cartItems = [];
+        cartTotal = 0;
+        document.getElementById('cart-summary').innerText = 'Belum ada item dipilih.';
+    }
+</script>
+
+</body>
+</html>
